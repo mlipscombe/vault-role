@@ -23,4 +23,5 @@
   service:
     name: vault-server
     state: started
+  when: vault_server
 
