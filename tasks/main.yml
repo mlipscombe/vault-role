@@ -4,17 +4,23 @@
     msg: "You MUST provide a vault configuration through the variable vault_server_config_path"
   when: vault_server_config_path is not defined and vault_server_mode != 'development'
 
+- name: Create vault group
+  group:
+    name: "{{vault_group}}"
+    system: true
+
 - name: Create vault user
   user:
     name: "{{vault_user}}"
-    password: "{{vault_user_password}}"
+    group: "{{vault_group}}"
+    system: true
 
 - name: Create vault directory
   file:
     path: "{{vault_dir}}"
     state: directory
     owner: "{{vault_user}}"
-    group: "{{vault_user}}"
+    group: "{{vault_group}}"
 
 - name: Check vault version
   shell: "vault --version 2>&1 | grep {{vault_version}}"
@@ -56,7 +62,7 @@
     path: "{{vault_server_log_dir}}"
     state: directory
     owner: "{{vault_user}}"
-    group: "{{vault_user}}"
+    group: "{{vault_group}}"
   when: vault_server
   register: vault_log_task
 

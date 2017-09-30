@@ -1,6 +1,9 @@
 - debug:
     var: ansible_service_mgr
 
+- debug:
+    var: vault_server
+
 - name: Create vault service script
   template:
     src: vault-server.j2
