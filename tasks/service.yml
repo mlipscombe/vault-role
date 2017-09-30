@@ -22,11 +22,5 @@
 - name: Start vault server
   service:
     name: vault-server
-    state: restarted
-  when: ansible_service_mgr == "upstart" and (vault_log_task|changed or vault_service_task_upstart|changed)
+    state: started
 
-- name: Start vault server
-  service:
-    name: vault-server.service
-    state: restarted
-  when: ansible_service_mgr == "systemd" and (vault_log_task|changed or vault_service_task_systemd|changed)
