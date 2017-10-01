@@ -4,6 +4,8 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
+User={{ vault_user }}
+Group={{ vault_group }}
 Restart=on-failure
 {% if vault_server_mode == 'development' %}
 ExecStart=/usr/bin/vault server -dev
