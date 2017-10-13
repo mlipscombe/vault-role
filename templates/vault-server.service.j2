@@ -8,7 +8,7 @@ User={{ vault_user }}
 Group={{ vault_group }}
 Restart=on-failure
 {% if vault_server_mode == 'development' %}
-ExecStart=/usr/bin/vault server -dev
+ExecStart=/usr/bin/vault server -dev -config={{ vault_server_config_path }}
 {% else %}
 ExecStart=/usr/bin/vault server -config={{ vault_server_config_path }}
 {% endif %}

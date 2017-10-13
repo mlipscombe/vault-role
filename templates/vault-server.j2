@@ -26,7 +26,7 @@ start() {
 	echo "Starting vault server daemon..."
 	VAULT_OPTIONS=""
     {% if vault_server_mode == 'development' %}
-    VAULT_OPTIONS="-dev"
+    VAULT_OPTIONS="-dev -config={{vault_server_config_path}}"
     {% else %}
     VAULT_OPTIONS="-config={{vault_server_config_path}} -log-level={{vault_server_log_level}}"
     {% endif %}
